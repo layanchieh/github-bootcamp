@@ -1,56 +1,80 @@
 ![工作坊完成徽章](https://img.shields.io/badge/GitHub_Copilot_實戰工作坊-已完成-1F883D?style=for-the-badge&logo=githubcopilot&logoColor=white)
 
+![Agent Mode](https://img.shields.io/badge/Agent_Mode-已實作-1E2761?style=flat-square)
+![MCP](https://img.shields.io/badge/MCP-已整合-1E2761?style=flat-square)
+![Agentic Workflow](https://img.shields.io/badge/Agentic_Workflow-已建立-1E2761?style=flat-square)
+
 # 待辦清單 Web App
 
-這是一個在 GitHub Copilot 實戰工作坊中完成的待辦清單 Web App，目標是練習透過 AI 協作開發純前端應用程式，並整合 GitHub Copilot Agent Mode、MCP 與 agentic workflow 的實作方式。
+在 **GitHub Copilot 實戰工作坊**中完成的純前端待辦清單應用程式。
+整個專案沒有手動撰寫程式碼 —— 全部透過 GitHub Copilot 的 **Agent Mode**、**MCP** 與**自訂 agentic workflow** 完成。
 
-## 線上展示
+## 🌐 線上展示
 
-GitHub Pages：https://<你的帳號>.github.io/<你的repo名稱>/
+**https://<你的帳號>.github.io/<你的repo名稱>/**
 
-> 這個網址先作為占位連結，之後可依實際帳號與 repository 名稱更新。
+> ⚠️ 請把上面這行換成你自己的 GitHub Pages 網址(Step 5 動手做 B 拿到的那個)。
 
-## 功能
+## ✨ 功能
 
-- 新增待辦事項
-- 刪除單一待辦事項
-- 完成與未完成狀態切換
-- 編輯已存在的待辦內容
-- 依狀態篩選待辦：全部、未完成、已完成
-- 清除所有已完成項目
-- 深色模式切換
-- 使用 localStorage 保存待辦資料與使用者偏好設定
-- 重新整理後保留目前篩選狀態
+- 新增待辦事項,空白內容不會送出
+- 勾選標記完成 / 取消完成,完成的項目會加上刪除線並淡化
+- 刪除單筆待辦事項
+- 底部即時顯示「未完成:N 項」
+- 篩選檢視:全部 / 未完成 / 已完成
+- 深色模式切換,偏好會被記住;未手動切換過時自動跟隨作業系統設定
+- 所有資料存在瀏覽器 `localStorage`,重新整理不會遺失
+- 置中卡片式版面,支援手機螢幕
 
-## 技術
+## 🛠 技術
 
-這個專案採用純 HTML、CSS 與原生 JavaScript 開發，沒有使用任何前端框架，也沒有額外套件依賴。資料儲存方式使用瀏覽器的 localStorage，讓待辦內容與偏好設定能在重新整理後保留。
+| 項目 | 內容 |
+| :--- | :--- |
+| 前端 | HTML5、CSS3、原生 JavaScript(ES2020+) |
+| 框架 / 套件 | **無** —— 沒有 React / Vue / jQuery,沒有 `package.json`,沒有建置流程 |
+| 外部資源 | **無** —— 不引用任何 CDN,可完全離線運作 |
+| 資料儲存 | 瀏覽器 `localStorage` |
+| 主題切換 | CSS 變數 + `prefers-color-scheme` |
+| 部署 | GitHub Pages(靜態託管) |
 
-- HTML：結構與內容
-- CSS：版面設計、主題樣式與響應式調整
-- JavaScript：狀態管理、事件處理、篩選邏輯、資料持久化
-- 無框架、無套件、可離線運作
+檔案結構:
 
-## 開發方式
+```
+index.html    # 版面結構
+styles.css    # 樣式與深淺色主題
+app.js        # 所有互動邏輯與資料存取
+```
 
-這個專案是在 GitHub Copilot 實戰工作坊中，以 Agent Mode 的方式逐步開發完成。整體流程包含：
+## 🤖 開發方式
 
-- 使用 GitHub Copilot 協助撰寫與調整前端程式碼
-- 依需求逐步增加功能，並保持專案結構簡單且可維護
-- 使用 MCP（Model Context Protocol）相關工具讀取 issue 與工作流程內容
-- 依 GitHub issue 進行 bug 修正與驗證
-- 透過 `.github/prompts` 中的 agentic workflow 指示，讓修正流程更有組織性與一致性
+這個專案的重點不在「做了一個待辦清單」,而在**它是怎麼被做出來的**。
 
-這種方式強調以 issue 為中心的開發流程，讓需求、實作與驗證能保持連貫，而不是僅用單一對話方式直接完成功能。
+| 階段 | 使用的能力 | 做了什麼 |
+| :--- | :--- | :--- |
+| 1 | **Agent Mode** | 給一段完整需求描述,AI 自行規劃並建立 `index.html`、`styles.css`、`app.js` 三個檔案 |
+| 2 | **Agent Mode(多檔修改)** | 一次跨三個檔案加上深色模式與篩選功能;並練習用檢查點與版本控制還原 AI 的錯誤修改 |
+| 3 | **MCP 整合** | 透過 `.vscode/mcp.json` 接上 Microsoft Learn 與 GitHub 兩個 MCP Server,讓 AI 能查詢官方文件、讀取本 repo 的 issue |
+| 4 | **Agentic Workflow** | 建立 `.github/copilot-instructions.md`(專案規範)與 `.github/prompts/fix-issue.prompt.md`(任務劇本),讓 AI 能自動讀 issue → 開分支 → 修改 → 開 Pull Request |
+| 5 | **結業** | 合併 AI 開出的 PR、部署到 GitHub Pages |
 
-## 我學到什麼
+值得一提的是第 4 階段:**修好一個 issue 的完整流程被寫成一份 Markdown 檔**,
+所以修第二個 issue 時,只需要輸入 `/fix-issue issueNumber=4` —— AI 會自己讀 issue、提出計畫、改程式、開 PR。
 
-- 如何用 AI 協助快速建立前端原型，並維持可控的開發節奏
-- 如何把需求拆成小步驟，逐一修正與驗證，而不是一次做太多變更
-- 在純前端專案中，資料持久化與狀態管理需要更小心處理，以避免 UI 行為與使用者預期不一致
-- GitHub Copilot 不只是寫程式工具，也是協助理解 issue、規劃修正與驗證結果的工作夥伴
-- 在有限架構中，良好的命名、簡潔邏輯與明確驗證步驟，能顯著提升專案維護性
+相關檔案:
 
----
+- [`.github/copilot-instructions.md`](.github/copilot-instructions.md) —— 專案通則,每次對話自動帶入
+- [`.github/prompts/fix-issue.prompt.md`](.github/prompts/fix-issue.prompt.md) —— 可重複執行的任務劇本
+- [`.vscode/mcp.json`](.vscode/mcp.json) —— MCP Server 設定
+- [`CHANGELOG.md`](CHANGELOG.md) —— 功能變更紀錄
 
-這份作品集簡要記錄了這個待辦清單 App 的建置過程與學習重點，作為 GitHub Copilot 實戰工作坊成果的一部分。
+## 💡 我學到什麼
+
+1. **Agent Mode 和自動補完是完全不同的東西。** 你給的是目標,不是步驟 —— AI 會自己決定要開哪些檔案、執行什麼指令,遇到錯誤會回頭修正。
+2. **提示詞寫得越完整,結果越好,而且更省。** 一次把規格交辦清楚,遠勝過來回追問十次。
+3. **MCP 打開了 AI 的視野。** 沒有 MCP,AI 只看得到本機檔案;有了 MCP,它能查最新的官方文件、讀我 GitHub 上的 issue。
+4. **會反悔比會生成更重要。** 檢查點、工作區捨棄、版本控制回退 —— 知道怎麼還原,才敢放手讓 AI 做事。
+5. **把流程寫下來才會變成資產。** 好的提示詞留在聊天記錄裡就消失了;寫成 repo 裡的檔案,才能版控、被審查、被整個團隊重複使用。
+
+## 📄 授權
+
+MIT
