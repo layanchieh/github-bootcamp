@@ -299,6 +299,7 @@ input {
   text-align: center;
   color: var(--muted-color);
   font-size: 0.96rem;
+  line-height: 1.6;
   min-height: 24px;
 }
 
