@@ -1,9 +1,21 @@
 // 待辦清單的儲存鍵值，避免與其他本地資料衝突
 const TODO_STORAGE_KEY = 'todo-list-demo';
 const THEME_STORAGE_KEY = 'todo-theme';
+const FILTER_STORAGE_KEY = 'todo-filter';
 
 // 目前的篩選條件，預設為全部
 let currentFilter = 'all';
+
+// 讀取上次儲存的篩選條件，若資料錯誤則回退到全部
+function getStoredFilter() {
+  const savedFilter = localStorage.getItem(FILTER_STORAGE_KEY);
+
+  if (savedFilter === 'all' || savedFilter === 'active' || savedFilter === 'completed') {
+    return savedFilter;
+  }
+
+  return 'all';
+}
 
 // 取得目前待辦項目，若本地資料不存在則回傳空陣列
 function getTodos() {
@@ -301,7 +313,11 @@ function clearCompletedTodos() {
 
 // 切換目前篩選條件
 function setFilter(filter) {
-  currentFilter = filter;
+  const validFilters = ['all', 'active', 'completed'];
+  const nextFilter = validFilters.includes(filter) ? filter : 'all';
+
+  currentFilter = nextFilter;
+  localStorage.setItem(FILTER_STORAGE_KEY, nextFilter);
   renderTodos();
 }
 
@@ -373,6 +389,7 @@ themeToggle.addEventListener('click', () => {
   localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
 });
 
-// 頁面初始化：先套用主題並渲染目前資料
+// 頁面初始化：先還原篩選狀態、套用主題並渲染目前資料
+currentFilter = getStoredFilter();
 initTheme();
 renderTodos();
