@@ -80,11 +80,11 @@ function getEmptyMessage() {
   }
 
   if (currentFilter === 'active') {
-    return '太棒了,沒有未完成的事項!';
+    return '目前沒有未完成的事項。切換到「全部」可查看所有待辦。';
   }
 
   if (currentFilter === 'completed') {
-    return '還沒有已完成的事項。';
+    return '目前沒有已完成的事項。切換到「全部」可查看所有待辦。';
   }
 
   return '還沒有任何待辦事項,新增一個吧!';
